@@ -121,6 +121,7 @@ public class Robot extends TimedRobot {
         CommandScheduler.getInstance().cancelAll();
 
 		if (mTestingCommand != null) {
+			System.out.println("Schedule testing");
 			mTestingCommand.schedule();
 		}
     }

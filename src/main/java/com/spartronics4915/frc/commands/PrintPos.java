@@ -32,8 +32,9 @@ public class PrintPos extends CommandBase {
     public void execute() {
         while(true) {
             Pose2d result = cam.getEstimatedGlobalPose().getFirst();
-			System.out.println("Got pose: ", result.toString());
+			System.out.println("Maybe got pose: ");
             if(result != null) {
+				System.out.println("Got pose: ");
                 SmartDashboard.putNumber("Pose2D X", result.getX());
                 SmartDashboard.putNumber("Pose2D Y", result.getY());
         }
