@@ -76,6 +76,6 @@ public class RobotContainer {
     }
 
 	public Command getTestingCommand() {
-		return new PrintPos(camerawrapper);
+		return new PrintPos(cameraWrapper);
 	}
 }
