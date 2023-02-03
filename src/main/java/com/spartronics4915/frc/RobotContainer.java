@@ -6,6 +6,7 @@ package com.spartronics4915.frc;
 
 import com.spartronics4915.frc.commands.ExampleCommands;
 import com.spartronics4915.frc.subsystems.ExampleSubsystem;
+import com.spartronics4915.frc.PrintPos;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
@@ -32,6 +33,8 @@ public class RobotContainer {
 
     private final Command mAutoCommand;
     private final Command mTeleopCommand;
+
+	private PhotonCameraWrapper cameraWrapper = new PhotonCameraWrapper();
 
     /**
      * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -71,4 +74,7 @@ public class RobotContainer {
     public Command getTeleopCommand() {
         return mTeleopCommand;
     }
+
+	public Command getTestingCommand() {
+		return new PrintPos(camerawrapper);
 }
