@@ -78,4 +78,8 @@ public class RobotContainer {
 	public Command getTestingCommand() {
 		return new PrintPos(cameraWrapper);
 	}
+
+	public void initRobot() {
+		return
+	}
 }
