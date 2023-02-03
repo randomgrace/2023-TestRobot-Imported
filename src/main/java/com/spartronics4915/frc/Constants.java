@@ -29,4 +29,19 @@ public final class Constants {
         public static final double kDeadzone = 0.05;
         public static final double kResponseCurveExponent = 5.0 / 3.0;
     }
+    public static final class FieldConstants {
+        static final double length = Units.feetToMeters(54);
+        static final double width = Units.feetToMeters(27);
+    }
+
+    public static final class VisionConstants {
+        static final Transform3d robotToCam =
+                new Transform3d(
+                        new Translation3d(0.5, 0.0, 0.5),
+                        new Rotation3d(
+                                0, 0,
+                                0)); // Cam mounted facing forward, half a meter forward of center, half a meter up
+        // from center.
+        static final String cameraName = "Arducam_OV9281_USB_Camera";
+    }
 }
