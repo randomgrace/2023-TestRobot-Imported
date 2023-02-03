@@ -52,7 +52,7 @@ import org.photonvision.PhotonCamera;
      public PhotonCameraWrapper() {
          AprilTagFieldLayout atfl;
         try {
-            atfl = AprilTagFieldLayout.loadFromResource(AprilTagFields.kChargedUp.m_resourceFile);
+            atfl = AprilTagFieldLayout.loadFromResource(AprilTagFields.k2023ChargedUp.m_resourceFile);
         } catch (IOException e) {
             atfl = null;
         }
