@@ -76,6 +76,7 @@ public class RobotContainer {
     }
 
 	public Command getTestingCommand() {
+		System.out.println("***** Get command");
 		return new PrintPos(cameraWrapper);
 	}
 

@@ -30,6 +30,7 @@ public class PrintPos extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
+		System.out.println("**** PrintPos Execute");
         while(true) {
             Pose2d result = cam.getEstimatedGlobalPose().getFirst();
 			System.out.println("Maybe got pose: ");
