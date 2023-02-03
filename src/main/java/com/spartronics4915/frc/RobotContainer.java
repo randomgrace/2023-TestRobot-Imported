@@ -80,6 +80,6 @@ public class RobotContainer {
 	}
 
 	public void initRobot() {
-		return
+		return;
 	}
 }
