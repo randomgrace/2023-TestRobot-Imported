@@ -20,6 +20,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 public class Robot extends TimedRobot {
     private Command mAutonomousCommand;
     private Command mTeleopCommand;
+	private Command mTestingCommand;
 
     private RobotContainer mRobotContainer;
 
@@ -34,6 +35,12 @@ public class Robot extends TimedRobot {
         // and put our
         // autonomous chooser on the dashboard.
         mRobotContainer = new RobotContainer();
+
+        mAutonomousCommand = mRobotContainer.getAutonomousCommand();
+        mTeleopCommand = mRobotContainer.getTeleopCommand();
+        mTestingCommand = mRobotContainer.getTestingCommand();
+
+        mRobotContainer.initRobot();
     }
 
     /**
@@ -112,6 +119,10 @@ public class Robot extends TimedRobot {
     public void testInit() {
         // Cancels all running commands at the start of test mode.
         CommandScheduler.getInstance().cancelAll();
+
+		if (mTestingCommand != null) {
+			mTestingCommand.schedule();
+		}
     }
 
     /** This function is called periodically during test mode. */
