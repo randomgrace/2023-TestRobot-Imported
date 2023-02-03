@@ -6,7 +6,7 @@ package com.spartronics4915.frc;
 
 import com.spartronics4915.frc.commands.ExampleCommands;
 import com.spartronics4915.frc.subsystems.ExampleSubsystem;
-import com.spartronics4915.frc.PrintPos;
+import com.spartronics4915.frc.commands.PrintPos;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
