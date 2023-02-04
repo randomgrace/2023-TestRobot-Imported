@@ -59,6 +59,6 @@ public final class Constants {
                                 0, 0,
                                 0)); // Cam mounted facing forward, half a meter forward of center, half a meter up
         // from center.
-        static final String cameraName = "HP_Pro_Webcam_C920";
+        static final String cameraName = "OV5647";
     }
 }
