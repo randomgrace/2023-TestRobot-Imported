@@ -32,7 +32,7 @@ public class RobotContainer {
     private final ExampleCommands mExampleCommands;
 
     private final Command mAutoCommand;
-    private final Command mTeleopCommand;
+    private Command mTeleopCommand;
 	private Command mTestingCommand;
 
 	private PhotonCameraWrapper cameraWrapper = new PhotonCameraWrapper();
@@ -73,6 +73,8 @@ public class RobotContainer {
     }
 
     public Command getTeleopCommand() {
+		System.out.println("***** Get teleop command");
+		mTeleopCommand = new PrintPos(cameraWrapper);
         return mTeleopCommand;
     }
 

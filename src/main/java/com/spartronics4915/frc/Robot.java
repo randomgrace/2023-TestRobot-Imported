@@ -104,6 +104,9 @@ public class Robot extends TimedRobot {
         }
 
         mTeleopCommand = mRobotContainer.getTeleopCommand();
+        System.out.println("***** Test Command: "  + mTeleopCommand.toString());
+
+        System.out.println("***** Try schedule test");
 
         if (mTeleopCommand != null) {
             mTeleopCommand.schedule();
@@ -119,6 +122,8 @@ public class Robot extends TimedRobot {
     public void testInit() {
         // Cancels all running commands at the start of test mode.
         CommandScheduler.getInstance().cancelAll();
+        mTestingCommand = mRobotContainer.getTestingCommand();
+		System.out.println("***** Test Command: "  + mTestingCommand.toString());
 
 		System.out.println("***** Try schedule test");
 		if (mTestingCommand != null) {
