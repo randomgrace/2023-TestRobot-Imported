@@ -33,10 +33,19 @@ public class PrintPos extends CommandBase {
     public void execute() {
 //        while(true) {
             Pose2d result = cam.getEstimatedGlobalPose().getFirst();
+
             if(result != null) {
-				System.out.println("Got pose: " + result.toString());
+//				System.out.println("Got pose: " + result.toString());
                 SmartDashboard.putNumber("Pose2D X", result.getX());
                 SmartDashboard.putNumber("Pose2D Y", result.getY());
+			PhotonPipelineResult latest = cam.getLatestResult();
+			if (latest != null) {
+				if (latest.hasTargets()) {
+					PhotonTrackedTarget target = latest.getBestTarget();
+					int targetID = target.getFiducialID();
+					SmartDashboard.putNumber("ID", targetID);
+				}
+			}
         }
 //        }
         
