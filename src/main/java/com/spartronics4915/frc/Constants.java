@@ -60,7 +60,7 @@ public final class Constants {
                                 0)); // Cam mounted facing forward, half a meter forward of center, half a meter up
         // from center.
         // Limelight
-		// static final String cameraName = "OV5647";
-        static final String cameraName = "HD_Pro_Webcam_C920";
+		static final String cameraName = "OV5647";
+        // static final String cameraName = "HD_Pro_Webcam_C920";
     }
 }
