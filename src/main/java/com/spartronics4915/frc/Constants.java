@@ -61,6 +61,7 @@ public final class Constants {
         // from center.
         // Limelight
 		// static final String cameraName = "OV5647";
-        static final String cameraName = "HD_Pro_Webcam_C920";
+        // static final String cameraName = "HD_Pro_Webcam_C920";
+        static final String cameraName = "Arducam_OV9281_USB_Camera";
     }
 }
