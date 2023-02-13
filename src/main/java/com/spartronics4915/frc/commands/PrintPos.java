@@ -8,6 +8,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import org.photonvision.targeting.PhotonPipelineResult;
 import org.photonvision.targeting.PhotonTrackedTarget;
+import java.io.*;
+import java.lang.Thread;
 
 /** An example command that uses an example subsystem. */
 public class PrintPos extends CommandBase {
@@ -28,18 +30,30 @@ public class PrintPos extends CommandBase {
     @Override
     public void initialize() {
 		System.out.println("**** PrintPos init");
+		cam.photonCamera.setDriverMode(true);
+		var initdmode = cam.photonCamera.getDriverMode();
+		if (initdmode) {
+			SmartDashboard.putString("InitDmode: ", "on");
+		} else {
+			SmartDashboard.putString("InitDmode: ", "off");
+		}
     }
 
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
 //        while(true) {
+			
+			cam.photonCamera.setDriverMode(true);
+
             Pose2d result = cam.getEstimatedGlobalPose().getFirst();
 			if (result != null) {
 				SmartDashboard.putString("Pose: ", result.toString());
 			}
 			var currPipe = cam.photonCamera.getPipelineIndex();
 			SmartDashboard.putNumber("CurrPipe ", currPipe);
+//			var nickName = cam.photonCamera.getPipelineNickname(currPipe);
+//			SmartDashboard.putString("NickName: ", nickName);
 			var dmode = cam.photonCamera.getDriverMode();
 			if (dmode) {
 				SmartDashboard.putString("Dmode: ", "on");
@@ -65,6 +79,14 @@ public class PrintPos extends CommandBase {
 					SmartDashboard.putNumber("Amb", poseAmb);
 				}
 			}
+			try {
+
+				Thread.sleep(10);
+			}
+			catch (Exception e) {
+				System.out.println(e);
+			}
+			cam.photonCamera.setDriverMode(true);
         }
 //        }
         
