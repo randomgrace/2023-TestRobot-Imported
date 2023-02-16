@@ -31,6 +31,9 @@ public class PrintPos extends CommandBase {
     public void initialize() {
 		System.out.println("**** PrintPos init");
 		cam.photonCamera.setDriverMode(true);
+		cam.photonCamera.setPipelineIndex(-1);
+		var dPipe = cam.photonCamera.getPipelineIndex();
+		System.out.println("Dpipe: " + dPipe);
 		var initdmode = cam.photonCamera.getDriverMode();
 		if (initdmode) {
 			SmartDashboard.putString("InitDmode: ", "on");
@@ -45,6 +48,7 @@ public class PrintPos extends CommandBase {
 //        while(true) {
 			
 			cam.photonCamera.setDriverMode(true);
+			cam.photonCamera.setPipelineIndex(-1);
 
             Pose2d result = cam.getEstimatedGlobalPose().getFirst();
 			if (result != null) {
