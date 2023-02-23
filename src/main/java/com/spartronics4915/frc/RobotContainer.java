@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 
-import static com.spartronics4915.frc.Constants.OIConstants.*;
+import static com.spartronics4915.frc.Constants.OI.*;
 
 /**
  * This class is where the bulk of the robot should be declared. Since

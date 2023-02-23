@@ -8,6 +8,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import org.photonvision.targeting.PhotonPipelineResult;
 import org.photonvision.targeting.PhotonTrackedTarget;
+import edu.wpi.first.networktables.BooleanPublisher;
+import edu.wpi.first.networktables.BooleanSubscriber;
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import java.io.*;
 import java.lang.Thread;
 
@@ -23,6 +27,7 @@ public class PrintPos extends CommandBase {
      */
     public PrintPos(PhotonCameraWrapper cameraWrapper) {
         cam = cameraWrapper;
+
         // Use addRequirements() here to declare subsystem dependencies.
     }
 
@@ -30,8 +35,25 @@ public class PrintPos extends CommandBase {
     @Override
     public void initialize() {
 		System.out.println("**** PrintPos init");
-		cam.photonCamera.setDriverMode(true);
-		cam.photonCamera.setPipelineIndex(-1);
+        var camNam = cam.photonCamera.getName();
+		NetworkTableInstance netInst = NetworkTableInstance.getDefault();
+		NetworkTable photTab = netInst.getTable("photonvision");
+		NetworkTable camSub = photTab.getSubTable(cam.photonCamera.getName());
+//		cam.photonCamera.setDriverMode(true);
+		System.out.println("Cam sub" + camSub);
+
+        BooleanPublisher drivReq = camSub.getBooleanTopic("driverModeRequest").publish();
+		BooleanPublisher drivMod = camSub.getBooleanTopic("driverMode").publish();
+		BooleanSubscriber currReq = camSub.getBooleanTopic("driverModeRequest").subscribe(false);
+		BooleanSubscriber currMod = camSub.getBooleanTopic("driverMode").subscribe(false);
+		System.out.println("Dreq: " + currReq.get());
+    	System.out.println("DMod: " + currMod.get());
+		drivMod.set(true);
+		drivReq.set(true);
+		System.out.println("Dreq2: " + currReq.get());
+		System.out.println("DMod2: " + currMod.get());
+////		cam.photonCamera.driverModeRequest(true);
+////		cam.photonCamera.setPipelineIndex(-1);
 		var dPipe = cam.photonCamera.getPipelineIndex();
 		System.out.println("Dpipe: " + dPipe);
 		var initdmode = cam.photonCamera.getDriverMode();
@@ -40,65 +62,43 @@ public class PrintPos extends CommandBase {
 		} else {
 			SmartDashboard.putString("InitDmode: ", "off");
 		}
+//		for (int i = 0; i < 20; i++) {
+//			System.out.println("Dreq3: " + currReq.get());
+//			System.out.println("DMod3: " + currMod.get());
+//		}
+
+
     }
 
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-//        while(true) {
 			
-			cam.photonCamera.setDriverMode(true);
-			cam.photonCamera.setPipelineIndex(-1);
-
-            Pose2d result = cam.getEstimatedGlobalPose().getFirst();
-			if (result != null) {
-				SmartDashboard.putString("Pose: ", result.toString());
-			}
+//			cam.photonCamera.setDriverMode(true);
 			var currPipe = cam.photonCamera.getPipelineIndex();
 			SmartDashboard.putNumber("CurrPipe ", currPipe);
-//			var nickName = cam.photonCamera.getPipelineNickname(currPipe);
-//			SmartDashboard.putString("NickName: ", nickName);
 			var dmode = cam.photonCamera.getDriverMode();
 			if (dmode) {
 				SmartDashboard.putString("Dmode: ", "on");
 			} else {
 				SmartDashboard.putString("Dmode: ", "off");
 			}
-			var latestr = cam.photonCamera.getLatestResult();
-			SmartDashboard.putString("Pipe: ", latestr.toString());
-
-            if(result != null) {
-//				System.out.println("Got pose: " + result.toString());
-                SmartDashboard.putNumber("Pose2D X", result.getX());
-                SmartDashboard.putNumber("Pose2D Y", result.getY());
-				var latest = cam.photonCamera.getLatestResult();
-				SmartDashboard.putString("Result: ", latest.toString());
-
-			if (latest != null) {
-				if (latest.hasTargets()) {
-					PhotonTrackedTarget target = latest.getBestTarget();
-					int targetId = target.getFiducialId();
-					SmartDashboard.putNumber("ID", targetId);
-					double poseAmb = target.getPoseAmbiguity();
-					SmartDashboard.putNumber("Amb", poseAmb);
-				}
-			}
-			try {
-
-				Thread.sleep(10);
-			}
-			catch (Exception e) {
-				System.out.println(e);
-			}
-			cam.photonCamera.setDriverMode(true);
-        }
-//        }
         
     }
 
     // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
+		NetworkTableInstance netInst = NetworkTableInstance.getDefault();
+		NetworkTable photTab = netInst.getTable("photonvision");
+		NetworkTable camSub = photTab.getSubTable(cam.photonCamera.getName());
+//		cam.photonCamera.setDriverMode(true);
+		System.out.println("Cam sub" + camSub);
+
+        BooleanPublisher drivReq = camSub.getBooleanTopic("driverModeRequest").publish();
+		BooleanPublisher drivMod = camSub.getBooleanTopic("driverMode").publish();
+		drivMod.set(false);
+		drivReq.set(false);
     }
 
     // Returns true when the command should end.

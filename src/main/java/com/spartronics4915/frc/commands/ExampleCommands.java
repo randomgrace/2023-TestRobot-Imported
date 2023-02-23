@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 import static com.spartronics4915.frc.Constants.ExampleSubsystem.*;
-import static com.spartronics4915.frc.Constants.OIConstants.*;
+import static com.spartronics4915.frc.Constants.OI.*;
 
 public class ExampleCommands {
     private ExampleSubsystem mExampleSubsystem;
