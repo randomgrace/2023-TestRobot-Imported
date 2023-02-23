@@ -9,7 +9,7 @@ import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import com.spartronics4915.frc.PhotonCameraWrapper;
 
-public class DriveModeCommands {
+public class DriveModeCommands extends CommandBase {
 	@SuppressWarnings({ "PMD.UnusedPrivateField", "PMD.SingularField" })
     private PhotonCameraWrapper mCam;
 	private boolean mNewDriveMode;
@@ -21,7 +21,7 @@ public class DriveModeCommands {
 
 	public class SetDriveMode extends InstantCommand {
 
-		public SetDriveMode(boolean newDriveMode) {
+		public void SetDriveMode(boolean newDriveMode) {
 			mNewDriveMode = newDriveMode;
 
 	        NetworkTableInstance netInst = NetworkTableInstance.getDefault();

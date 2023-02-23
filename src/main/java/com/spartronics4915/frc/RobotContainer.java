@@ -7,6 +7,7 @@ package com.spartronics4915.frc;
 import com.spartronics4915.frc.commands.ExampleCommands;
 import com.spartronics4915.frc.subsystems.ExampleSubsystem;
 import com.spartronics4915.frc.commands.PrintPos;
+import com.spartronics4915.frc.commands.DriveModeCommands;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
@@ -74,7 +75,7 @@ public class RobotContainer {
 
     public Command getTeleopCommand() {
 		System.out.println("***** Get teleop command");
-		mTeleopCommand = new PrintPos(cameraWrapper);
+		mTeleopCommand = new DriveModeCommands(cameraWrapper);
         return mTeleopCommand;
     }
 
